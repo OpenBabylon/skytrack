@@ -1,0 +1,10 @@
+# Single‑run SkyPilot job example
+name: skytrack-single
+resources:
+  accelerators: A100:1
+  cloud: gcp
+setup: |
+  pip install skytrack wandb torch
+  wandb login --relogin $WANDB_API_KEY
+run: |
+  python examples/pure_pytorch.py

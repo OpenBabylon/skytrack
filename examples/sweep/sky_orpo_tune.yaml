@@ -1,0 +1,17 @@
+# Example large‑scale ORPO grid (uses variables like {{lr}})
+name: mamay-orpo-grid
+resources:
+  accelerators: H100:8
+  cloud: gcp
+  disk_size: 400
+  use_spot: true
+setup: |
+  pip install skytrack torch flash-attn --no-build-isolation
+  wandb login --relogin $WANDB_API_KEY
+run: |
+  python train_orpo.py --lr {{lr}} --gbs {{gbs}}
+tune:
+  strategy: grid
+  parameters:
+    lr:  {values: [1e-6, 5e-6, 1e-5, 5e-5]}
+    gbs: {values: [8, 16]}

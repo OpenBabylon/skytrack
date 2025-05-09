@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skytrack"
+dynamic = ["version"]
+authors = [{name = "Your Name"}]
+description = "Lightweight W&B + SkyPilot tracker"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "wandb>=0.17.0",
+    "pyyaml",
+    "omegaconf",
+    "psutil",
+    "torch; extra == 'torch'",
+]
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+
+[project.optional-dependencies]
+dev = ["pytest", "flake8", "black"]
+
+[tool.setuptools]
+packages = ["skytrack"]
+
+[tool.setuptools_scm]

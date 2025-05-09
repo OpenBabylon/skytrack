@@ -1,0 +1,15 @@
+# Generic grid sweep template (edit parameters for your own work)
+name: skytrack-sweep
+resources:
+  accelerators: A100:2
+  cloud: gcp
+setup: |
+  pip install skytrack torch wandb
+  wandb login --relogin $WANDB_API_KEY
+run: |
+  python examples/pure_pytorch.py --lr {{lr}} --bs {{bs}}
+tune:
+  strategy: grid
+  parameters:
+    lr: {values: [1e-4, 5e-4, 1e-3]}
+    bs: {values: [32, 64]}
