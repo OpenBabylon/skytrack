@@ -129,7 +129,7 @@ def sweep(cfg_path: str | Path):
         # -------- launch ----------------------------------------------------
         print(f"🚀 launch {slug}")
         try:
-            subprocess.check_call(["sky", "launch", "-d", "--name", slug, task_path])
+            subprocess.check_call(["sky", "launch", "-d", "-y", "--name", slug, task_path])
             state.setdefault(slug, 0)          # init retry counter
         except subprocess.CalledProcessError:
             state[slug] = state.get(slug, 0) + 1
