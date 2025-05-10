@@ -25,3 +25,6 @@ dev = ["pytest", "flake8", "black"]
 packages = ["skytrack"]
 
 [tool.setuptools_scm]
+
+[project.scripts]
+sky-tune = "skytrack:_cli"

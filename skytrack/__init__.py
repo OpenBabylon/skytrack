@@ -15,6 +15,8 @@ raw ``wandb`` calls and SkyPilot job files.
 from .logging import init, log, log_gradients, log_lr
 from .callbacks import SkyTrackCallback
 from .artifacts import log_artifacts
+from wandb import watch as watch
+from .sweep import sweep  # re-export
 
 __all__ = [
     "init", "log", "log_gradients", "log_lr",
@@ -22,3 +24,12 @@ __all__ = [
 ]
 
 __version__ = "0.1.0"
+
+
+def _cli():
+    """Real sky-tune command:  sky-tune <sweep.yaml>"""
+    import argparse
+    p = argparse.ArgumentParser(description="SkyPilot-based hyper-sweep")
+    p.add_argument("yaml", help="Sweep YAML file")
+    args = p.parse_args()
+    sweep(args.yaml)
